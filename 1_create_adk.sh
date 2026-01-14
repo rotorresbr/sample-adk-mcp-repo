@@ -18,7 +18,7 @@ adk create $NOME_AGENTE
 #copia o conteúdo do agent.py.sample para o arquivo agent.py, e o conteúdo do .env.sample para o .env no folder do agente
 cat agent.py.sample > $NOME_AGENTE/agent.py
 cat .env.sample > $NOME_AGENTE/.env
-(echo "\nGIT_TOKEN=$GIT_TOKEN") >> $NOME_AGENTE/.env
+sed -i '' "s/f\"Bearer {os.environ.get('GIT_TOKEN')}\"/\"Bearer $GIT_TOKEN\"/g" $NOME_AGENTE/agent.py
 
 #rodando o agente
 adk run $NOME_AGENTE
